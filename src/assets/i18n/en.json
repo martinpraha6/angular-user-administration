@@ -1,3 +1,10 @@
 {
-  "app.title": "User administration"
+  "app.title": "User administration",
+
+  "user-table.headline": "User list",
+  "user-table.filter.placeholder": "Filter",
+  "user-table.header.id": "ID",
+  "user-table.header.firstname": "Firstname",
+  "user-table.header.surname": "Surname",
+  "user-table.header.email": "Email"
 }
