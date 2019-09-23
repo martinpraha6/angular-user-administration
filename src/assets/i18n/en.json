@@ -1,6 +1,8 @@
 {
   "app.title": "User administration",
 
+  "user.headline": "User detail",
+
   "user-table.headline": "User list",
   "user-table.filter.placeholder": "Filter",
   "user-table.header.id": "ID",
