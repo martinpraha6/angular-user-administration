@@ -1,4 +1,24 @@
-<mat-toolbar>
-  <span class="col-md-6 col-sm-12 mb-1">{{ "user.headline" | translate }}</span>
+<mat-toolbar class="mb-4">
+  <span class="col-md-6 col-sm-12">{{ "user.headline" | translate }}</span>
 </mat-toolbar>
-<app-user-detail></app-user-detail>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-6 col-sm-12">
+      <ng-container *ngIf="isLoading$ | async">
+        <mat-progress-spinner
+          [color]="'primary'"
+          [mode]="'indeterminate'"
+          [value]="50"
+        >
+        </mat-progress-spinner>
+      </ng-container>
+      <ng-container>
+        <app-user-detail
+          [user]="user"
+          [isEditting]="isEditting$"
+        ></app-user-detail>
+      </ng-container>
+    </div>
+  </div>
+</div>

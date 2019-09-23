@@ -1,1 +1,30 @@
-<p>user-detail works!</p>
+<mat-card
+  class="user-detail"
+  [ngClass]="{ 'user-detail--is-edditing': isEditting | async }"
+>
+  <mat-card-header>
+    <mat-card-title>
+      {{ user.firstname }} {{ user.surname }}
+      <span class="user-detail__email">{{ user.email }}</span>
+    </mat-card-title>
+    <mat-card-subtitle>
+      {{ "user-detail.created-at" | translate }}
+      {{ user.createdAt | formatDateTime }}
+      <span *ngIf="user.modifiedAt"
+        >, {{ "user-detail.modified-at" | translate }}
+        {{ user.modifiedAt | formatDateTime }}</span
+      >
+    </mat-card-subtitle>
+  </mat-card-header>
+  <img
+    mat-card-image
+    src="https://source.unsplash.com/random/500x500"
+    alt="{{ user.firstname }} {{ user.surname }}"
+  />
+  <mat-card-actions>
+    <button mat-button>{{ "user-detail.buttons.edit" | translate }}</button>
+    <button mat-button disabled>
+      {{ "user-detail.buttons.delete" | translate }}
+    </button>
+  </mat-card-actions>
+</mat-card>

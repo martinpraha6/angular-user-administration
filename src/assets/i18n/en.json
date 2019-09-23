@@ -3,10 +3,16 @@
 
   "user.headline": "User detail",
 
+  "user-detail.buttons.edit": "Edit",
+  "user-detail.buttons.delete": "Delete",
+  "user-detail.created-at": "created at ",
+  "user-detail.modified-at": "last modified at ",
+
   "user-table.headline": "User list",
   "user-table.filter.placeholder": "Filter",
   "user-table.header.id": "ID",
   "user-table.header.firstname": "Firstname",
   "user-table.header.surname": "Surname",
-  "user-table.header.email": "Email"
+  "user-table.header.email": "Email",
+  "user-table.button.open-detail": "Open detail"
 }

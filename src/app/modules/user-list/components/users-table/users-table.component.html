@@ -51,6 +51,20 @@
           <td mat-cell *matCellDef="let row">{{ row.email }}</td>
         </ng-container>
 
+        <ng-container matColumnDef="openButton">
+          <th mat-header-cell *matHeaderCellDef></th>
+          <td mat-cell *matCellDef="let row">
+            <button
+              mat-button
+              aria-label="Open the detail"
+              routerLink="/user/{{ row.id }}"
+              routerLinkActive="active"
+            >
+              {{ "user-table.button.open-detail" | translate }}
+            </button>
+          </td>
+        </ng-container>
+
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
       </table>

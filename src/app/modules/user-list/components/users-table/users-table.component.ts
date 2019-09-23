@@ -18,7 +18,13 @@ import { takeUntil } from "rxjs/operators";
   styleUrls: ["./users-table.component.scss"]
 })
 export class UsersTableComponent implements OnInit, OnDestroy {
-  public displayedColumns: string[] = ["id", "surname", "firstname", "email"];
+  public displayedColumns: string[] = [
+    "id",
+    "surname",
+    "firstname",
+    "email",
+    "openButton"
+  ];
   public dataSource;
   public isLoading$: Observable<boolean>;
   private _ngDestroyed$ = new Subject();
@@ -37,15 +43,12 @@ export class UsersTableComponent implements OnInit, OnDestroy {
         this.dataSource = new MatTableDataSource(users);
       });
 
-    this.store.select(getUsers).subscribe(users => {
-      this.dataSource = new MatTableDataSource(users);
-    });
     this.isLoading$ = this.store.select(getUsersLoading);
     this.dataSource.sort = this.sort;
     this.store.dispatch(new UserListLoad());
   }
 
-  applyFilter(filterValue: string) {
+  public applyFilter(filterValue: string) {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
