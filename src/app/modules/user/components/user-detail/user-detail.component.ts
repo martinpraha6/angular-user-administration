@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from "@angular/core";
 
 import { User } from "src/app/models/users.model";
+import { Observable } from "rxjs";
 
 @Component({
   selector: "app-user-detail",
@@ -12,7 +13,7 @@ export class UserDetailComponent implements OnInit {
   user: User;
 
   @Input()
-  isEditting: boolean;
+  isEditting: Observable<boolean>;
 
   constructor() {}
 
