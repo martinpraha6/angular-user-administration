@@ -61,6 +61,10 @@
         [placeholder]="'user-form.email.placeholder' | translate"
         formControlName="email"
       />
+      <mat-error *ngIf="userForm.get('email').hasError('email')">
+        {{ "user-form.email.placeholder" | translate }}
+        {{ "form.validator.email" | translate }}
+      </mat-error>
     </mat-form-field>
 
     <div class="col-md-12 col-12 d-flex justify-content-between mt-3">

@@ -4,6 +4,5 @@ export class User {
   surname: string;
   createdAt: Date;
   email?: string;
-  image?: string;
   modifiedAt?: Date;
 }

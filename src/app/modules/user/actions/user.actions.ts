@@ -3,6 +3,7 @@ import { User } from "src/app/models/users.model";
 
 export enum UserActionTypes {
   INIT_USER_FORM = "[Users] Initialize the user form",
+  CLOSE_USER_FORM = "[Users] Close the user form",
 
   CREATE_USER = "[Users] Create a new user",
   CREATE_USER_SUCCESS = "[Users] Create a new user was successfully",
@@ -19,6 +20,12 @@ export class InitUserForm implements Action {
   readonly type = UserActionTypes.INIT_USER_FORM;
 
   constructor(public payload: User) {}
+}
+
+export class CloseUserForm implements Action {
+  readonly type = UserActionTypes.CLOSE_USER_FORM;
+
+  constructor() {}
 }
 
 export class UserCreate implements Action {
@@ -77,6 +84,7 @@ export class UserRemoveFail implements Action {
 
 export type UserActions =
   | InitUserForm
+  | CloseUserForm
   | UserCreate
   | UserCreateSuccess
   | UserCreateFail

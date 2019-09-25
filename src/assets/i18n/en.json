@@ -24,5 +24,6 @@
   "form.button.edit.submit": "Edit",
   "form.button.cancel": "Cancel",
   "form.validator.required": "Please provide value",
-  "form.validator.minlength": "Please provide at least {{minlength}} characters"
+  "form.validator.minlength": "Please provide at least {{minlength}} characters",
+  "form.validator.email": "should be valid"
 }

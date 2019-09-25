@@ -25,6 +25,11 @@ export function userDetailReducer(
         isEditting: true,
         user: action.payload
       };
+    case UserActionTypes.CLOSE_USER_FORM:
+      return {
+        ...state,
+        isEditting: false
+      };
   }
   return state;
 }
