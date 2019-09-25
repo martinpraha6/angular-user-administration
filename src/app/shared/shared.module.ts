@@ -23,6 +23,7 @@ import { StoreDevtoolsModule } from "@ngrx/store-devtools";
 import { FormatDateTimePipe } from "./pipes/format-date-time.pipe";
 import { UserFormComponent } from "./components/user-form/user-form.component";
 import { HttpLoaderFactory } from "./helpers/http-loader-factory";
+import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
 
 @NgModule({
   imports: [
@@ -44,6 +45,8 @@ import { HttpLoaderFactory } from "./helpers/http-loader-factory";
       }
     }),
 
+    FontAwesomeModule,
+
     MatToolbarModule,
     MatTableModule,
     MatFormFieldModule,
@@ -64,6 +67,7 @@ import { HttpLoaderFactory } from "./helpers/http-loader-factory";
     TranslateModule,
     FormatDateTimePipe,
     UserFormComponent,
+    FontAwesomeModule,
 
     MatToolbarModule,
     MatTableModule,
