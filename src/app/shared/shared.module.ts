@@ -3,7 +3,9 @@ import { CommonModule } from "@angular/common";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 
 import { StoreModule } from "@ngrx/store";
-import { TranslateModule } from "@ngx-translate/core";
+import { TranslateModule, TranslateLoader } from "@ngx-translate/core";
+import { HttpClientModule, HttpClient } from "@angular/common/http";
+
 
 import { MatToolbarModule } from "@angular/material/toolbar";
 import { MatTableModule } from "@angular/material/table";
@@ -20,10 +22,13 @@ import { reducers } from "../store";
 import { environment } from "src/environments/environment";
 import { StoreDevtoolsModule } from "@ngrx/store-devtools";
 import { FormatDateTimePipe } from "./pipes/format-date-time.pipe";
+import { UserFormComponent } from './components/user-form/user-form.component';
+import { HttpLoaderFactory } from './helpers/http-loader-factory';
 
 @NgModule({
   imports: [
     CommonModule,
+    HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
     StoreModule.forRoot(reducers),
@@ -32,7 +37,14 @@ import { FormatDateTimePipe } from "./pipes/format-date-time.pipe";
       : StoreDevtoolsModule.instrument({
           name: "angular-user-administration"
         }),
-
+    TranslateModule.forChild({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient]
+      }
+    }),
+        
     MatToolbarModule,
     MatTableModule,
     MatFormFieldModule,
