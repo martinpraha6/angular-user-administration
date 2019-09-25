@@ -1,0 +1,79 @@
+<mat-card class="user-form">
+  <mat-card-title>
+    {{
+      (userForm.get("id").value
+        ? "form.button.edit.submit"
+        : "form.button.create.submit") | translate
+    }}
+  </mat-card-title>
+
+  <form
+    [formGroup]="userForm"
+    #userFormRef="ngForm"
+    (ngSubmit)="onSubmit(userFormRef)"
+    class="row"
+  >
+    <mat-form-field class="col-md-12">
+      <input
+        matInput
+        [placeholder]="'user-form.firstname.placeholder' | translate"
+        formControlName="firstname"
+      />
+      <mat-error *ngIf="userForm.get('firstname').hasError('minlength')">
+        {{
+          "form.validator.minlength"
+            | translate
+              : {
+                  minlength: userForm.get("firstname").errors.minlength
+                    .requiredLength
+                }
+        }}
+      </mat-error>
+      <mat-error *ngIf="userForm.get('firstname').hasError('required')">
+        {{ "form.validator.required" | translate }}
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="col-md-12">
+      <input
+        matInput
+        [placeholder]="'user-form.surname.placeholder' | translate"
+        formControlName="surname"
+      />
+      <mat-error *ngIf="userForm.get('surname').hasError('minlength')">
+        {{
+          "form.validator.minlength"
+            | translate
+              : {
+                  minlength: userForm.get("surname").errors.minlength
+                    .requiredLength
+                }
+        }}
+      </mat-error>
+      <mat-error *ngIf="userForm.get('surname').hasError('required')">
+        {{ "form.validator.required" | translate }}
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="col-md-12">
+      <input
+        matInput
+        [placeholder]="'user-form.email.placeholder' | translate"
+        formControlName="email"
+      />
+    </mat-form-field>
+
+    <div class="col-md-12 col-12 d-flex justify-content-between mt-3">
+      <button type="submit" mat-raised-button color="primary">
+        {{
+          (userForm.get("id").value
+            ? "form.button.edit.submit"
+            : "form.button.create.submit") | translate
+        }}
+      </button>
+      <button (click)="closeForm()" mat-raised-button>
+        {{ "form.button.cancel" | translate }}
+      </button>
+    </div>
+  </form>
+</mat-card>

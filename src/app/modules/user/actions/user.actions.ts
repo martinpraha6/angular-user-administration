@@ -2,6 +2,8 @@ import { Action } from "@ngrx/store";
 import { User } from "src/app/models/users.model";
 
 export enum UserActionTypes {
+  INIT_USER_FORM = "[Users] Initialize the user form",
+
   CREATE_USER = "[Users] Create a new user",
   CREATE_USER_SUCCESS = "[Users] Create a new user was successfully",
   CREATE_USER_FAIL = "[Users] Failed to create a new user",
@@ -11,6 +13,12 @@ export enum UserActionTypes {
   REMOVE_USER = "[Users] Remove a new user",
   REMOVE_USER_SUCCESS = "[Users] Remove a new user was successfully",
   REMOVE_USER_FAIL = "[Users] Failed to remove a new user"
+}
+
+export class InitUserForm implements Action {
+  readonly type = UserActionTypes.INIT_USER_FORM;
+
+  constructor(public payload: User) {}
 }
 
 export class UserCreate implements Action {
@@ -68,6 +76,7 @@ export class UserRemoveFail implements Action {
 }
 
 export type UserActions =
+  | InitUserForm
   | UserCreate
   | UserCreateSuccess
   | UserCreateFail

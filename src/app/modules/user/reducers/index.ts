@@ -1,5 +1,6 @@
 import { Action } from "@ngrx/store";
 import { User } from "src/app/models/users.model";
+import { UserActionTypes, UserActions } from "../actions/user.actions";
 
 export interface UserDetailState {
   user?: User;
@@ -15,7 +16,15 @@ export const initialState: UserDetailState = {
 
 export function userDetailReducer(
   state: UserDetailState = initialState,
-  action: Action
+  action: UserActions
 ): UserDetailState {
+  switch (action.type) {
+    case UserActionTypes.INIT_USER_FORM:
+      return {
+        ...state,
+        isEditting: true,
+        user: action.payload
+      };
+  }
   return state;
 }

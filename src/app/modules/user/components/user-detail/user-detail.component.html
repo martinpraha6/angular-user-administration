@@ -22,7 +22,9 @@
     alt="{{ user.firstname }} {{ user.surname }}"
   />
   <mat-card-actions>
-    <button mat-button>{{ "user-detail.buttons.edit" | translate }}</button>
+    <button mat-button [disabled]="isEditting | async" (click)="onEditClick()">
+      {{ "user-detail.buttons.edit" | translate }}
+    </button>
     <button mat-button disabled>
       {{ "user-detail.buttons.delete" | translate }}
     </button>

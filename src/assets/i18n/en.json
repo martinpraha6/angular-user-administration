@@ -14,5 +14,15 @@
   "user-table.header.firstname": "Firstname",
   "user-table.header.surname": "Surname",
   "user-table.header.email": "Email",
-  "user-table.button.open-detail": "Open detail"
+  "user-table.button.open-detail": "Open detail",
+
+  "user-form.firstname.placeholder": "Firstname",
+  "user-form.surname.placeholder": "Surname",
+  "user-form.email.placeholder": "Email",
+
+  "form.button.create.submit": "Create",
+  "form.button.edit.submit": "Edit",
+  "form.button.cancel": "Cancel",
+  "form.validator.required": "Please provide value",
+  "form.validator.minlength": "Please provide at least {{minlength}} characters"
 }

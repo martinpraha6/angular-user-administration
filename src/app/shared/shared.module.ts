@@ -6,7 +6,6 @@ import { StoreModule } from "@ngrx/store";
 import { TranslateModule, TranslateLoader } from "@ngx-translate/core";
 import { HttpClientModule, HttpClient } from "@angular/common/http";
 
-
 import { MatToolbarModule } from "@angular/material/toolbar";
 import { MatTableModule } from "@angular/material/table";
 import { MatFormFieldModule } from "@angular/material/form-field";
@@ -22,8 +21,8 @@ import { reducers } from "../store";
 import { environment } from "src/environments/environment";
 import { StoreDevtoolsModule } from "@ngrx/store-devtools";
 import { FormatDateTimePipe } from "./pipes/format-date-time.pipe";
-import { UserFormComponent } from './components/user-form/user-form.component';
-import { HttpLoaderFactory } from './helpers/http-loader-factory';
+import { UserFormComponent } from "./components/user-form/user-form.component";
+import { HttpLoaderFactory } from "./helpers/http-loader-factory";
 
 @NgModule({
   imports: [
@@ -44,7 +43,7 @@ import { HttpLoaderFactory } from './helpers/http-loader-factory';
         deps: [HttpClient]
       }
     }),
-        
+
     MatToolbarModule,
     MatTableModule,
     MatFormFieldModule,
@@ -56,7 +55,7 @@ import { HttpLoaderFactory } from './helpers/http-loader-factory';
     MatButtonModule,
     MatIconModule
   ],
-  declarations: [FormatDateTimePipe],
+  declarations: [FormatDateTimePipe, UserFormComponent],
   exports: [
     CommonModule,
     FormsModule,
@@ -64,6 +63,7 @@ import { HttpLoaderFactory } from './helpers/http-loader-factory';
 
     TranslateModule,
     FormatDateTimePipe,
+    UserFormComponent,
 
     MatToolbarModule,
     MatTableModule,

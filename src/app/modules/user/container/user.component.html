@@ -20,5 +20,10 @@
         ></app-user-detail>
       </ng-container>
     </div>
+    <div class="col-md-6 col-sm-12">
+      <ng-container *ngIf="isEditting$ | async">
+        <app-user-form [userFormData]="user"></app-user-form>
+      </ng-container>
+    </div>
   </div>
 </div>
