@@ -11,6 +11,7 @@ import {
 } from "../../user-list/selectors";
 import { take, takeUntil } from "rxjs/operators";
 import { faAngleLeft } from "@fortawesome/free-solid-svg-icons";
+import { UserListSetEditing } from "../../user-list/actions/user-list.actions";
 
 @Component({
   selector: "app-user",
@@ -47,6 +48,7 @@ export class UserComponent implements OnInit, OnDestroy {
   }
 
   public backToUserList() {
+    this.store.dispatch(new UserListSetEditing(false));
     this.router.navigate([`user-list`], { relativeTo: this.route });
   }
 
