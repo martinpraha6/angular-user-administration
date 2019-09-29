@@ -12,16 +12,6 @@
 
   <div class="container" *ngIf="!(isLoading$ | async)">
     <div class="row">
-      <mat-form-field class="col-md-6 col-sm-12">
-        <input
-          matInput
-          (keyup)="applyFilter($event.target.value)"
-          placeholder="{{ 'user-table.filter.placeholder' | translate }}"
-        />
-      </mat-form-field>
-    </div>
-
-    <div class="row">
       <div class="col-12 mat-elevation-z8 mb-4">
         <mat-table [dataSource]="dataSource" matSort class="users-table">
           <ng-container matColumnDef="id">

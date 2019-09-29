@@ -16,6 +16,7 @@ export class UserListComponent implements OnInit {
   public isEditing$: Observable<boolean>;
   public user: User;
   public faPlus = faPlus;
+  public filter: string;
 
   constructor(private store: Store<AppState>) {}
 
@@ -30,5 +31,9 @@ export class UserListComponent implements OnInit {
   public editUser(user: User) {
     this.store.dispatch(new UserListSetEditing(true));
     this.user = user;
+  }
+
+  public setFilter(filterValue: string): void {
+    this.filter = filterValue;
   }
 }

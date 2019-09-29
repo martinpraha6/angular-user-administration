@@ -5,16 +5,30 @@
 </mat-toolbar>
 <div class="container">
   <div class="row">
-    <button
-      mat-icon-button
-      [color]="'primary'"
-      attr.aria-label="{{ 'user-list.button.add' | translate }}"
-      (click)="onClickCreate()"
-    >
-      <fa-icon [icon]="faPlus"></fa-icon>
-    </button>
     <div [ngClass]="{ 'col-md-6': isEditing$ | async }" class="col-sm-12">
-      <app-users-table (editUser)="editUser($event)"></app-users-table>
+      <div class="row">
+        <mat-form-field class="col-md-6 col-sm-12">
+          <input
+            matInput
+            (keyup)="setFilter($event.target.value)"
+            placeholder="{{ 'user-table.filter.placeholder' | translate }}"
+          />
+        </mat-form-field>
+        <div class="col-md-6 col-sm-12 add-user-button">
+          <button
+            mat-icon-button
+            [color]="'primary'"
+            attr.aria-label="{{ 'user-list.button.add' | translate }}"
+            (click)="onClickCreate()"
+          >
+            <fa-icon [icon]="faPlus"></fa-icon>
+          </button>
+        </div>
+      </div>
+      <app-users-table
+        (editUser)="editUser($event)"
+        [filter]="filter"
+      ></app-users-table>
     </div>
     <div class="col-md-6 col-sm-12" *ngIf="isEditing$ | async">
       <app-user-form [userFormData]="user"></app-user-form>

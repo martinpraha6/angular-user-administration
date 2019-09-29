@@ -4,7 +4,9 @@ import {
   ViewChild,
   OnDestroy,
   EventEmitter,
-  Output
+  Input,
+  Output,
+  SimpleChanges
 } from "@angular/core";
 import { MatSort } from "@angular/material/sort";
 import { MatTableDataSource } from "@angular/material/table";
@@ -43,6 +45,9 @@ export class UsersTableComponent implements OnInit, OnDestroy {
 
   private _ngDestroyed$ = new Subject();
 
+  @Input()
+  filter: string;
+
   @Output()
   editUser = new EventEmitter<User>();
 
@@ -68,8 +73,10 @@ export class UsersTableComponent implements OnInit, OnDestroy {
     this.store.dispatch(new UserListLoad());
   }
 
-  public applyFilter(filterValue: string): void {
-    this.dataSource.filter = filterValue.trim().toLowerCase();
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes.filter && changes.filter.currentValue) {
+      this.dataSource.filter = changes.filter.currentValue.trim().toLowerCase();
+    }
   }
 
   public onClickCreate(): void {
