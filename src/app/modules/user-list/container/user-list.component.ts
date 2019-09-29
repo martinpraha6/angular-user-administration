@@ -1,4 +1,4 @@
-import { Component, OnInit, Output } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
 import { Observable } from "rxjs";
 import { User } from "src/app/models/users.model";
 import { Store } from "@ngrx/store";

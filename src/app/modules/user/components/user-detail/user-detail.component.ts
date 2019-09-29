@@ -1,10 +1,12 @@
-import { Component, Input, OnInit } from "@angular/core";
+import { Component, Input, OnInit, EventEmitter, Output } from "@angular/core";
 
 import { User } from "src/app/models/users.model";
-import { Observable } from "rxjs";
 import { AppState } from "src/app/store";
 import { Store } from "@ngrx/store";
-import { InitUserForm } from "src/app/modules/user-list/actions/user-list.actions";
+import {
+  InitUserForm,
+  UserRemove
+} from "src/app/modules/user-list/actions/user-list.actions";
 
 @Component({
   selector: "app-user-detail",
@@ -18,11 +20,19 @@ export class UserDetailComponent implements OnInit {
   @Input()
   isEditing: boolean;
 
+  @Output()
+  userRemoved = new EventEmitter<User>();
+
   constructor(private store: Store<AppState>) {}
 
   ngOnInit(): void {}
 
   onEditClick(user: User) {
     this.store.dispatch(new InitUserForm(this.user));
+  }
+
+  onRemoveClick(user: User) {
+    this.store.dispatch(new UserRemove(this.user));
+    this.userRemoved.emit(user);
   }
 }

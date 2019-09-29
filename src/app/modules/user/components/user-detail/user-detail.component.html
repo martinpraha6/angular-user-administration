@@ -27,7 +27,7 @@
     <button mat-button [disabled]="isEditing" (click)="onEditClick()">
       {{ "user-detail.buttons.edit" | translate }}
     </button>
-    <button mat-button disabled>
+    <button mat-button [disabled]="isEditing" (click)="onRemoveClick()">
       {{ "user-detail.buttons.delete" | translate }}
     </button>
   </mat-card-actions>

@@ -19,12 +19,11 @@ import { faAngleLeft } from "@fortawesome/free-solid-svg-icons";
 })
 export class UserComponent implements OnInit, OnDestroy {
   public user: User;
-
   public isLoading$: Observable<boolean>;
   public isEditing: boolean;
-  private _ngDestroyed$ = new Subject();
+  public faAngleLeft = faAngleLeft;
 
-  faAngleLeft = faAngleLeft;
+  private _ngDestroyed$ = new Subject();
 
   constructor(
     private router: Router,

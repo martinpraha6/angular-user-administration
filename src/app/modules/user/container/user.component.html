@@ -24,6 +24,7 @@
         <app-user-detail
           [user]="user"
           [isEditing]="isEditing"
+          (userRemoved)="backToUserList()"
         ></app-user-detail>
       </ng-container>
     </div>
