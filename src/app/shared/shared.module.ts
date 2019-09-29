@@ -16,9 +16,6 @@ import { MatCardModule } from "@angular/material/card";
 import { MatButtonModule } from "@angular/material/button";
 import { MatIconModule } from "@angular/material/icon";
 
-import { reducers } from "../store";
-import { environment } from "src/environments/environment";
-import { StoreDevtoolsModule } from "@ngrx/store-devtools";
 import { FormatDateTimePipe } from "./pipes/format-date-time.pipe";
 import { UserFormComponent } from "./components/user-form/user-form.component";
 import { HttpLoaderFactory } from "./helpers/http-loader-factory";
@@ -33,11 +30,6 @@ import { UsersEffects } from "../modules/user-list/effects/users.effects";
     FormsModule,
     ReactiveFormsModule,
     EffectsModule.forRoot([UsersEffects]),
-    environment.production
-      ? []
-      : StoreDevtoolsModule.instrument({
-          name: "angular-user-administration"
-        }),
     TranslateModule.forChild({
       loader: {
         provide: TranslateLoader,

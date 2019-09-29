@@ -14,7 +14,9 @@ import {
 import { HttpClientModule, HttpClient } from "@angular/common/http";
 import { HttpLoaderFactory } from "./shared/helpers/http-loader-factory";
 import { StoreModule } from "@ngrx/store";
+import { StoreDevtoolsModule } from "@ngrx/store-devtools";
 import { reducers } from "./store";
+import { environment } from "src/environments/environment";
 
 export function appInitializerFactory(
   translate: TranslateService,
@@ -61,6 +63,11 @@ export function appInitializerFactory(
       }
     }),
     StoreModule.forRoot(reducers),
+    environment.production
+      ? []
+      : StoreDevtoolsModule.instrument({
+          name: "angular-user-administration"
+        }),
     SharedModule
   ],
   providers: [
