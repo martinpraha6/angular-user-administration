@@ -33,7 +33,11 @@ export function appInitializerFactory(
         translate.setDefaultLang("en");
         translate.use(langToSet).subscribe(
           () => {
-            console.info(`Successfully initialized '${langToSet}' language.'`);
+            if (!environment.production) {
+              console.info(
+                `Successfully initialized '${langToSet}' language.'`
+              );
+            }
           },
           err => {
             console.error(

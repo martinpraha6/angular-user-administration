@@ -27,11 +27,11 @@ export class UserDetailComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  onEditClick(user: User) {
+  public onEditClick(user: User) {
     this.store.dispatch(new InitUserForm(this.user));
   }
 
-  onRemoveClick(user: User) {
+  public onRemoveClick(user: User) {
     this.store.dispatch(new UserRemove(this.user));
     this.userRemoved.emit(user);
   }

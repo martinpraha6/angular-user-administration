@@ -36,11 +36,12 @@ export class UsersTableComponent implements OnInit, OnDestroy {
   public dataSource: MatTableDataSource<User>;
   public isLoading$: Observable<boolean>;
   public isEditing$: Observable<boolean>;
-  private _ngDestroyed$ = new Subject();
 
-  faListUl = faListUl;
-  faEdit = faEdit;
-  faTrash = faTrash;
+  public faListUl = faListUl;
+  public faEdit = faEdit;
+  public faTrash = faTrash;
+
+  private _ngDestroyed$ = new Subject();
 
   @Output()
   editUser = new EventEmitter<User>();

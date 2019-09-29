@@ -22,10 +22,10 @@ import {
   styleUrls: ["./user-form.component.scss"]
 })
 export class UserFormComponent implements OnInit, OnChanges {
+  public userForm: FormGroup;
+
   @Input()
   userFormData: User;
-
-  userForm: FormGroup;
 
   constructor(private fb: FormBuilder, private store: Store<AppState>) {
     this.userForm = this.fb.group(UserFormControlsConfig);
