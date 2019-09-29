@@ -16,7 +16,7 @@ export class UserDetailComponent implements OnInit {
   user: User;
 
   @Input()
-  isEditing: Observable<boolean>;
+  isEditing: boolean;
 
   constructor(private store: Store<AppState>) {}
 

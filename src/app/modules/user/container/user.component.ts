@@ -1,15 +1,15 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, OnDestroy } from "@angular/core";
 import { User } from "src/app/models/users.model";
-import { Observable } from "rxjs";
+import { Observable, Subject } from "rxjs";
 import { ActivatedRoute, Router } from "@angular/router";
-import { Store } from "@ngrx/store";
+import { Store, select } from "@ngrx/store";
 import { AppState } from "src/app/store";
 import {
   getUsers,
   getUsersLoading,
   getUsersEditing
 } from "../../user-list/selectors";
-import { take } from "rxjs/operators";
+import { take, takeUntil } from "rxjs/operators";
 import { faAngleLeft } from "@fortawesome/free-solid-svg-icons";
 
 @Component({
@@ -17,11 +17,12 @@ import { faAngleLeft } from "@fortawesome/free-solid-svg-icons";
   templateUrl: "./user.component.html",
   styleUrls: ["./user.component.scss"]
 })
-export class UserComponent implements OnInit {
+export class UserComponent implements OnInit, OnDestroy {
   public user: User;
 
   public isLoading$: Observable<boolean>;
-  public isEditing$: Observable<boolean>;
+  public isEditing: boolean;
+  private _ngDestroyed$ = new Subject();
 
   faAngleLeft = faAngleLeft;
 
@@ -33,7 +34,15 @@ export class UserComponent implements OnInit {
 
   ngOnInit(): void {
     this.isLoading$ = this.store.select(getUsersLoading);
-    this.isEditing$ = this.store.select(getUsersEditing);
+    this.store
+      .pipe(
+        select(getUsersEditing),
+        takeUntil(this._ngDestroyed$)
+      )
+      .subscribe((isEditing: boolean) => {
+        this.isEditing = isEditing;
+        this.setUser();
+      });
 
     this.setUser();
   }
@@ -56,5 +65,10 @@ export class UserComponent implements OnInit {
           this.backToUserList();
         }
       });
+  }
+
+  ngOnDestroy(): void {
+    this._ngDestroyed$.next();
+    this._ngDestroyed$.complete();
   }
 }

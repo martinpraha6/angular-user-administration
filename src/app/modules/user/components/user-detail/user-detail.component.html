@@ -1,10 +1,12 @@
 <mat-card
   class="user-detail mat-elevation-z8"
-  [ngClass]="{ 'user-detail--is-edditing': isEditing | async }"
+  [ngClass]="{ 'user-detail--is-edditing': isEditing }"
 >
   <mat-card-header>
     <mat-card-title>
-      {{ user.firstname }} {{ user.surname }}
+      <span class="user-detail__name"
+        >{{ user.firstname }} {{ user.surname }}</span
+      >
       <span class="user-detail__email">{{ user.email }}</span>
     </mat-card-title>
     <mat-card-subtitle>
@@ -22,7 +24,7 @@
     alt="{{ user.firstname }} {{ user.surname }}"
   />
   <mat-card-actions>
-    <button mat-button [disabled]="isEditing | async" (click)="onEditClick()">
+    <button mat-button [disabled]="isEditing" (click)="onEditClick()">
       {{ "user-detail.buttons.edit" | translate }}
     </button>
     <button mat-button disabled>

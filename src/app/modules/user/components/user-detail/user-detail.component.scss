@@ -3,9 +3,12 @@
     opacity: 0.3;
   }
 
+  &__name {
+    margin-right: 1rem;
+  }
+
   &__email {
     color: #999;
     font-size: 80%;
-    margin-left: 1rem;
   }
 }
