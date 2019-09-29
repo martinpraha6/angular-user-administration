@@ -61,6 +61,12 @@ export function userListReducer(
         users,
         editing: false
       };
+    case UserListActionTypes.REMOVE_USER:
+      users = state.users.filter(user => user.id !== action.payload.id);
+      return {
+        ...state,
+        users
+      };
     case UserListActionTypes.INIT_USER_FORM:
       return {
         ...state,

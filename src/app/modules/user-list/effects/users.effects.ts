@@ -28,5 +28,13 @@ export class UsersEffects {
     })
   );
 
+  @Effect()
+  userRemove$: Observable<Action> = this.actions$.pipe(
+    ofType<UserUpdate>(UserListActionTypes.REMOVE_USER),
+    map(() => {
+      return new UserListLoad();
+    })
+  );
+
   constructor(private actions$: Actions) {}
 }
