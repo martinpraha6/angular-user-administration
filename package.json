@@ -1,6 +1,6 @@
 {
   "name": "angular-user-administration",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "scripts": {
     "ng": "ng",
     "start": "ng serve --open",
@@ -32,7 +32,7 @@
     "@angular/platform-browser": "^8.2.7",
     "@angular/platform-browser-dynamic": "^8.2.7",
     "@angular/router": "~8.2.7",
-    "@commitlint/cli": "^7.2.1",
+    "@commitlint/cli": "^8.2.0",
     "@commitlint/config-conventional": "^7.1.2",
     "@fortawesome/angular-fontawesome": "^0.5.0",
     "@fortawesome/fontawesome-svg-core": "^1.2.24",
