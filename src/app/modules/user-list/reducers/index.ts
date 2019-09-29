@@ -1,5 +1,4 @@
 import { User } from "src/app/models/users.model";
-import { mockUsers } from "src/mock/users.mock";
 import {
   UserListActionTypes,
   UserListActions

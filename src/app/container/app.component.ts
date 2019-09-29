@@ -17,7 +17,6 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log("load mock");
     this.store.dispatch(new UserListInit(mockUsers));
   }
 }

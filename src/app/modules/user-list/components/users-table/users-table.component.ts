@@ -14,13 +14,11 @@ import { AppState } from "src/app/store";
 import { getUsers, getUsersLoading, getUsersEditing } from "../../selectors";
 import {
   UserListLoad,
-  UserRemove,
-  UserListInit
+  UserRemove
 } from "src/app/modules/user-list/actions/user-list.actions";
 import { User } from "src/app/models/users.model";
 import { takeUntil } from "rxjs/operators";
 import { faListUl, faEdit, faTrash } from "@fortawesome/free-solid-svg-icons";
-import { mockUsers } from "src/mock/users.mock";
 
 @Component({
   selector: "app-users-table",
@@ -51,7 +49,6 @@ export class UsersTableComponent implements OnInit, OnDestroy {
 
   constructor(private store: Store<AppState>) {
     this.dataSource = new MatTableDataSource();
-    this.store.dispatch(new UserListInit(mockUsers));
   }
 
   ngOnInit() {
