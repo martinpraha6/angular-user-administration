@@ -1,4 +1,4 @@
-<mat-card class="user-form">
+<mat-card class="user-form mat-elevation-z8">
   <mat-card-title>
     {{
       (userForm.get("id").value
@@ -66,9 +66,13 @@
         {{ "form.validator.email" | translate }}
       </mat-error>
     </mat-form-field>
-
     <div class="col-md-12 col-12 d-flex justify-content-between mt-3">
-      <button type="submit" mat-raised-button color="primary">
+      <button
+        type="submit"
+        mat-raised-button
+        color="primary"
+        [disabled]="userForm.invalid"
+      >
         {{
           (userForm.get("id").value
             ? "form.button.edit.submit"

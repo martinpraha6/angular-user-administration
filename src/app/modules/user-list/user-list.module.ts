@@ -1,5 +1,6 @@
 import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
+import { EffectsModule } from "@ngrx/effects";
 
 import { UserListComponent } from "./container/user-list.component";
 import { UserListRoutingModule } from "./user-list-routing.module";
@@ -8,7 +9,7 @@ import { SharedModule } from "src/app/shared/shared.module";
 
 @NgModule({
   declarations: [UserListComponent, UsersTableComponent],
-  imports: [CommonModule, UserListRoutingModule, SharedModule], //EffectsModule.forFeature([EventsEffects])
+  imports: [CommonModule, UserListRoutingModule, SharedModule],
   providers: []
 })
 export class UserListModule {}

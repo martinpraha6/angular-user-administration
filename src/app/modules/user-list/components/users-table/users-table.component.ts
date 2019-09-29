@@ -1,17 +1,27 @@
-import { Component, OnInit, ViewChild, OnDestroy } from "@angular/core";
+import {
+  Component,
+  OnInit,
+  ViewChild,
+  OnDestroy,
+  EventEmitter,
+  Output
+} from "@angular/core";
 import { MatSort } from "@angular/material/sort";
 import { MatTableDataSource } from "@angular/material/table";
 import { Observable, Subject } from "rxjs";
 import { select, Store } from "@ngrx/store";
 import { AppState } from "src/app/store";
-import { getUsers, getUsersLoading } from "../../selectors";
-import { UserListLoad } from "src/app/modules/user-list/actions/user-list.actions";
+import { getUsers, getUsersLoading, getUsersEditing } from "../../selectors";
+import {
+  UserListLoad,
+  UserRemove,
+  UserListInit
+} from "src/app/modules/user-list/actions/user-list.actions";
 import { User } from "src/app/models/users.model";
 import { takeUntil } from "rxjs/operators";
+import { faListUl, faEdit, faTrash } from "@fortawesome/free-solid-svg-icons";
+import { mockUsers } from "src/mock/users.mock";
 
-/**
- * @title Data table with sorting, pagination, and filtering.
- */
 @Component({
   selector: "app-users-table",
   templateUrl: "./users-table.component.html",
@@ -23,15 +33,26 @@ export class UsersTableComponent implements OnInit, OnDestroy {
     "surname",
     "firstname",
     "email",
-    "openButton"
+    "buttons"
   ];
-  public dataSource;
+  public dataSource: MatTableDataSource<User>;
   public isLoading$: Observable<boolean>;
+  public isEditing$: Observable<boolean>;
   private _ngDestroyed$ = new Subject();
+
+  faListUl = faListUl;
+  faEdit = faEdit;
+  faTrash = faTrash;
+
+  @Output()
+  editUser = new EventEmitter<User>();
 
   @ViewChild(MatSort, { static: true }) sort: MatSort;
 
-  constructor(private store: Store<AppState>) {}
+  constructor(private store: Store<AppState>) {
+    this.dataSource = new MatTableDataSource();
+    this.store.dispatch(new UserListInit(mockUsers));
+  }
 
   ngOnInit() {
     this.store
@@ -40,16 +61,29 @@ export class UsersTableComponent implements OnInit, OnDestroy {
         takeUntil(this._ngDestroyed$)
       )
       .subscribe((users: User[]) => {
-        this.dataSource = new MatTableDataSource(users);
+        this.dataSource.data = users;
       });
 
     this.isLoading$ = this.store.select(getUsersLoading);
+    this.isEditing$ = this.store.select(getUsersEditing);
     this.dataSource.sort = this.sort;
     this.store.dispatch(new UserListLoad());
   }
 
-  public applyFilter(filterValue: string) {
+  public applyFilter(filterValue: string): void {
     this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
+
+  public onClickCreate(): void {
+    this.editUser.emit({} as User);
+  }
+
+  public onClickEdit(user: User): void {
+    this.editUser.emit(user);
+  }
+
+  public onClickDelete(user: User): void {
+    this.store.dispatch(new UserRemove(user));
   }
 
   ngOnDestroy(): void {

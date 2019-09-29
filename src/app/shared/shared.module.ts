@@ -2,7 +2,6 @@ import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 
-import { StoreModule } from "@ngrx/store";
 import { TranslateModule, TranslateLoader } from "@ngx-translate/core";
 import { HttpClientModule, HttpClient } from "@angular/common/http";
 
@@ -24,6 +23,8 @@ import { FormatDateTimePipe } from "./pipes/format-date-time.pipe";
 import { UserFormComponent } from "./components/user-form/user-form.component";
 import { HttpLoaderFactory } from "./helpers/http-loader-factory";
 import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
+import { EffectsModule } from "@ngrx/effects";
+import { UsersEffects } from "../modules/user-list/effects/users.effects";
 
 @NgModule({
   imports: [
@@ -31,7 +32,7 @@ import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
-    StoreModule.forRoot(reducers),
+    EffectsModule.forRoot([UsersEffects]),
     environment.production
       ? []
       : StoreDevtoolsModule.instrument({
@@ -78,7 +79,9 @@ import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
     MatProgressSpinnerModule,
     MatCardModule,
     MatButtonModule,
-    MatIconModule
+    MatIconModule,
+
+    EffectsModule
   ]
 })
 export class SharedModule {}

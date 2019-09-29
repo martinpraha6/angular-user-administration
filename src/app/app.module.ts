@@ -3,7 +3,7 @@ import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { APP_INITIALIZER, Injector, NgModule } from "@angular/core";
 
 import { AppRoutingModule } from "./app-routing.module";
-import { AppComponent } from "./app.component";
+import { AppComponent } from "./container/app.component";
 import { SharedModule } from "./shared/shared.module";
 import { LOCATION_INITIALIZED } from "@angular/common";
 import {
@@ -13,6 +13,8 @@ import {
 } from "@ngx-translate/core";
 import { HttpClientModule, HttpClient } from "@angular/common/http";
 import { HttpLoaderFactory } from "./shared/helpers/http-loader-factory";
+import { StoreModule } from "@ngrx/store";
+import { reducers } from "./store";
 
 export function appInitializerFactory(
   translate: TranslateService,
@@ -58,6 +60,7 @@ export function appInitializerFactory(
         deps: [HttpClient]
       }
     }),
+    StoreModule.forRoot(reducers),
     SharedModule
   ],
   providers: [

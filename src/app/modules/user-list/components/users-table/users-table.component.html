@@ -1,73 +1,104 @@
-<div class="container" *ngIf="isLoading$ | async">
-  <div class="row justify-content-center">
-    <mat-progress-spinner
-      [color]="'primary'"
-      [mode]="'indeterminate'"
-      [value]="50"
-    >
-    </mat-progress-spinner>
-  </div>
-</div>
-
-<div class="container" *ngIf="!(isLoading$ | async)">
-  <div class="row">
-    <mat-form-field class="col-md-6 col-sm-12">
-      <input
-        matInput
-        (keyup)="applyFilter($event.target.value)"
-        placeholder="{{ 'user-table.filter.placeholder' | translate }}"
-      />
-    </mat-form-field>
-  </div>
-
-  <div class="row">
-    <div class="col-12 mat-elevation-z8">
-      <table mat-table [dataSource]="dataSource" matSort>
-        <ng-container matColumnDef="id">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header>
-            {{ "user-table.header.id" | translate }}
-          </th>
-          <td mat-cell *matCellDef="let row">{{ row.id }}</td>
-        </ng-container>
-
-        <ng-container matColumnDef="surname">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header>
-            {{ "user-table.header.surname" | translate }}
-          </th>
-          <td mat-cell *matCellDef="let row">{{ row.surname }}</td>
-        </ng-container>
-
-        <ng-container matColumnDef="firstname">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header>
-            {{ "user-table.header.firstname" | translate }}
-          </th>
-          <td mat-cell *matCellDef="let row">{{ row.firstname }}</td>
-        </ng-container>
-
-        <ng-container matColumnDef="email">
-          <th mat-header-cell *matHeaderCellDef>
-            {{ "user-table.header.email" | translate }}
-          </th>
-          <td mat-cell *matCellDef="let row">{{ row.email }}</td>
-        </ng-container>
-
-        <ng-container matColumnDef="openButton">
-          <th mat-header-cell *matHeaderCellDef></th>
-          <td mat-cell *matCellDef="let row">
-            <button
-              mat-button
-              aria-label="Open the detail"
-              routerLink="/user/{{ row.id }}"
-              routerLinkActive="active"
-            >
-              {{ "user-table.button.open-detail" | translate }}
-            </button>
-          </td>
-        </ng-container>
-
-        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
-      </table>
+<ng-container *ngIf="dataSource.data && dataSource.data.length > 0">
+  <div class="container" *ngIf="isLoading$ | async">
+    <div class="row justify-content-center">
+      <mat-progress-spinner
+        [color]="'primary'"
+        [mode]="'indeterminate'"
+        [value]="50"
+      >
+      </mat-progress-spinner>
     </div>
   </div>
-</div>
+
+  <div class="container" *ngIf="!(isLoading$ | async)">
+    <div class="row">
+      <mat-form-field class="col-md-6 col-sm-12">
+        <input
+          matInput
+          (keyup)="applyFilter($event.target.value)"
+          placeholder="{{ 'user-table.filter.placeholder' | translate }}"
+        />
+      </mat-form-field>
+    </div>
+
+    <div class="row">
+      <div class="col-12 mat-elevation-z8">
+        <mat-table [dataSource]="dataSource" matSort class="users-table">
+          <ng-container matColumnDef="id">
+            <mat-header-cell
+              *matHeaderCellDef
+              mat-sort-header
+              class="users-table__id"
+            >
+              {{ "user-table.header.id" | translate }}
+            </mat-header-cell>
+            <mat-cell *matCellDef="let row" class="users-table__id">{{
+              row.id
+            }}</mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="surname">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>
+              {{ "user-table.header.surname" | translate }}
+            </mat-header-cell>
+            <mat-cell *matCellDef="let row">{{ row.surname }}</mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="firstname">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>
+              {{ "user-table.header.firstname" | translate }}
+            </mat-header-cell>
+            <mat-cell *matCellDef="let row">{{ row.firstname }}</mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="email">
+            <mat-header-cell *matHeaderCellDef>
+              {{ "user-table.header.email" | translate }}
+            </mat-header-cell>
+            <mat-cell *matCellDef="let row">{{ row.email }}</mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="buttons">
+            <mat-header-cell *matHeaderCellDef>
+              &nbsp;
+            </mat-header-cell>
+            <mat-cell *matCellDef="let row" class="users-table__buttons">
+              <button
+                mat-icon-button
+                [color]="'primary'"
+                attr.aria-label="{{
+                  'user-table.button.open-detail' | translate
+                }}"
+                routerLink="/user/{{ row.id }}"
+                routerLinkActive="active"
+              >
+                <fa-icon [icon]="faListUl"></fa-icon>
+              </button>
+
+              <button
+                mat-icon-button
+                [color]="'primary'"
+                attr.aria-label="{{ 'user-table.button.edit' | translate }}"
+                (click)="onClickEdit(row)"
+              >
+                <fa-icon [icon]="faEdit"></fa-icon>
+              </button>
+
+              <button
+                mat-icon-button
+                [color]="'primary'"
+                attr.aria-label="{{ 'user-table.button.delete' | translate }}"
+                (click)="onClickDelete(row)"
+              >
+                <fa-icon [icon]="faTrash"></fa-icon>
+              </button>
+            </mat-cell>
+          </ng-container>
+
+          <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+        </mat-table>
+      </div>
+    </div>
+  </div>
+</ng-container>

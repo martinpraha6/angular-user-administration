@@ -9,12 +9,12 @@ import { User } from "src/app/models/users.model";
 import { FormBuilder, FormGroup, FormGroupDirective } from "@angular/forms";
 import { AppState } from "src/app/store";
 import { Store } from "@ngrx/store";
+import { UserFormControlsConfig } from "./user-form.config";
 import {
   UserUpdate,
   UserCreate,
   CloseUserForm
-} from "src/app/modules/user/actions/user.actions";
-import { UserFormControlsConfig } from "./user-form.config";
+} from "src/app/modules/user-list/actions/user-list.actions";
 
 @Component({
   selector: "app-user-form",
@@ -43,9 +43,21 @@ export class UserFormComponent implements OnInit, OnChanges {
     }
   }
 
-  public onSubmit(userFormRef: FormGroupDirective) {}
+  public onSubmit(userFormRef: FormGroupDirective) {
+    if (this.userForm.valid) {
+      const data = this.userForm.getRawValue();
+      if (data.id && data.id !== "") {
+        this.store.dispatch(new UserUpdate(data));
+      } else {
+        this.store.dispatch(new UserCreate(data));
+      }
+      userFormRef.resetForm();
+      this.closeForm();
+    }
+  }
 
   public closeForm() {
+    this.userForm.reset();
     this.store.dispatch(new CloseUserForm());
   }
 }

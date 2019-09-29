@@ -3,4 +3,21 @@
     "user-table.headline" | translate
   }}</span>
 </mat-toolbar>
-<app-users-table></app-users-table>
+<div class="container">
+  <div class="row">
+    <button
+      mat-icon-button
+      [color]="'primary'"
+      attr.aria-label="{{ 'user-list.button.add' | translate }}"
+      (click)="onClickCreate()"
+    >
+      <fa-icon [icon]="faPlus"></fa-icon>
+    </button>
+    <div [ngClass]="{ 'col-md-6': isEditing$ | async }" class="col-sm-12">
+      <app-users-table (editUser)="editUser($event)"></app-users-table>
+    </div>
+    <div class="col-md-6 col-sm-12" *ngIf="isEditing$ | async">
+      <app-user-form [userFormData]="user"></app-user-form>
+    </div>
+  </div>
+</div>

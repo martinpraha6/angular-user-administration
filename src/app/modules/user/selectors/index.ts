@@ -11,7 +11,7 @@ export const getUserLoading = createSelector(
   state => state.loading
 );
 
-export const getUserIsEditting = createSelector(
+export const getUserIsEditing = createSelector(
   selectUserDetailState,
-  state => state.isEditting
+  state => state.editing
 );

@@ -1,4 +1,11 @@
 <mat-toolbar class="mb-4">
+  <button
+    mat-icon-button
+    attr.aria-label="{{ 'user.button.back-to-user-list' | translate }}"
+    (click)="backToUserList()"
+  >
+    <fa-icon [icon]="faAngleLeft"></fa-icon>
+  </button>
   <span class="col-md-6 col-sm-12">{{ "user.headline" | translate }}</span>
 </mat-toolbar>
 
@@ -16,12 +23,12 @@
       <ng-container>
         <app-user-detail
           [user]="user"
-          [isEditting]="isEditting$"
+          [isEditing]="isEditing$"
         ></app-user-detail>
       </ng-container>
     </div>
     <div class="col-md-6 col-sm-12">
-      <ng-container *ngIf="isEditting$ | async">
+      <ng-container *ngIf="isEditing$ | async">
         <app-user-form [userFormData]="user"></app-user-form>
       </ng-container>
     </div>

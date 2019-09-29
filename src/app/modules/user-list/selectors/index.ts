@@ -10,3 +10,8 @@ export const getUsersLoading = createSelector(
   selectUserListState,
   state => state.loading
 );
+
+export const getUsersEditing = createSelector(
+  selectUserListState,
+  state => state.editing
+);

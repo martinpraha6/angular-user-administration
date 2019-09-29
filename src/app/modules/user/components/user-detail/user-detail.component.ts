@@ -4,7 +4,7 @@ import { User } from "src/app/models/users.model";
 import { Observable } from "rxjs";
 import { AppState } from "src/app/store";
 import { Store } from "@ngrx/store";
-import { InitUserForm } from "../../actions/user.actions";
+import { InitUserForm } from "src/app/modules/user-list/actions/user-list.actions";
 
 @Component({
   selector: "app-user-detail",
@@ -16,7 +16,7 @@ export class UserDetailComponent implements OnInit {
   user: User;
 
   @Input()
-  isEditting: Observable<boolean>;
+  isEditing: Observable<boolean>;
 
   constructor(private store: Store<AppState>) {}
 

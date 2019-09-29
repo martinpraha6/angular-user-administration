@@ -1,6 +1,6 @@
 <mat-card
-  class="user-detail"
-  [ngClass]="{ 'user-detail--is-edditing': isEditting | async }"
+  class="user-detail mat-elevation-z8"
+  [ngClass]="{ 'user-detail--is-edditing': isEditing | async }"
 >
   <mat-card-header>
     <mat-card-title>
@@ -22,7 +22,7 @@
     alt="{{ user.firstname }} {{ user.surname }}"
   />
   <mat-card-actions>
-    <button mat-button [disabled]="isEditting | async" (click)="onEditClick()">
+    <button mat-button [disabled]="isEditing | async" (click)="onEditClick()">
       {{ "user-detail.buttons.edit" | translate }}
     </button>
     <button mat-button disabled>

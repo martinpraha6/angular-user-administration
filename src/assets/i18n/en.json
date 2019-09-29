@@ -2,6 +2,9 @@
   "app.title": "User administration",
 
   "user.headline": "User detail",
+  "user.button.back-to-user-list": "Back to user list",
+
+  "user-list.button.add": "Add new user",
 
   "user-detail.buttons.edit": "Edit",
   "user-detail.buttons.delete": "Delete",
@@ -15,6 +18,8 @@
   "user-table.header.surname": "Surname",
   "user-table.header.email": "Email",
   "user-table.button.open-detail": "Open detail",
+  "user-table.button.edit": "Edit user",
+  "user-table.button.delete": "Delete user",
 
   "user-form.firstname.placeholder": "Firstname",
   "user-form.surname.placeholder": "Surname",

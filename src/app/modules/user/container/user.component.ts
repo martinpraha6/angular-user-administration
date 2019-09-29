@@ -1,13 +1,16 @@
 import { Component, OnInit } from "@angular/core";
 import { User } from "src/app/models/users.model";
-import { mockUsers } from "src/mock/users.mock";
 import { Observable } from "rxjs";
-import { getUserIsEditting, getUserLoading } from "../selectors";
 import { ActivatedRoute, Router } from "@angular/router";
 import { Store } from "@ngrx/store";
 import { AppState } from "src/app/store";
-import { getUsers } from "../../user-list/selectors";
-import { take, filter } from "rxjs/operators";
+import {
+  getUsers,
+  getUsersLoading,
+  getUsersEditing
+} from "../../user-list/selectors";
+import { take } from "rxjs/operators";
+import { faAngleLeft } from "@fortawesome/free-solid-svg-icons";
 
 @Component({
   selector: "app-user",
@@ -15,10 +18,12 @@ import { take, filter } from "rxjs/operators";
   styleUrls: ["./user.component.scss"]
 })
 export class UserComponent implements OnInit {
-  public user: User = mockUsers[0];
+  public user: User;
 
   public isLoading$: Observable<boolean>;
-  public isEditting$: Observable<boolean>;
+  public isEditing$: Observable<boolean>;
+
+  faAngleLeft = faAngleLeft;
 
   constructor(
     private router: Router,
@@ -27,10 +32,14 @@ export class UserComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.isLoading$ = this.store.select(getUserLoading);
-    this.isEditting$ = this.store.select(getUserIsEditting);
+    this.isLoading$ = this.store.select(getUsersLoading);
+    this.isEditing$ = this.store.select(getUsersEditing);
 
     this.setUser();
+  }
+
+  public backToUserList() {
+    this.router.navigate([`user-list`], { relativeTo: this.route });
   }
 
   private setUser(): void {
@@ -44,7 +53,7 @@ export class UserComponent implements OnInit {
         if (selectedUser) {
           this.user = selectedUser;
         } else {
-          this.router.navigate([`user-list`], { relativeTo: this.route });
+          this.backToUserList();
         }
       });
   }
